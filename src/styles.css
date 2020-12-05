@@ -4,7 +4,9 @@ body {
   color: #17a2b8;
   text-align: center;
 }
-
+h3 {
+  line-height: 1;
+}
 .weather-app {
   border: 1px solid #dadde1;
   padding: 15px;
@@ -20,6 +22,7 @@ body {
   text-align: center;
 }
 .temp-icon {
+  margin-bottom: 10px;
   border-radius: 1px 60px;
   background-color: #badafb59;
   max-height: 80px;
