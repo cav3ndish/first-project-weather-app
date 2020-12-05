@@ -45,3 +45,6 @@ body {
   font-style: italic;
   font-weight: 500;
 }
+a:hover {
+  cursor: copy;
+}
