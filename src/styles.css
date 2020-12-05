@@ -1,0 +1,47 @@
+body {
+  font-family: "Sansita Swashed", cursive;
+  font-style: oblique;
+  color: #17a2b8;
+  text-align: center;
+}
+
+.weather-app {
+  border: 1px solid #dadde1;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 800px;
+}
+.current-city {
+  border-radius: 15px;
+  text-align: center;
+}
+#current-date-time {
+  text-align: center;
+}
+.temp-icon {
+  border-radius: 1px 60px;
+  background-color: #badafb59;
+  max-height: 80px;
+  max-width: 220px;
+  border: 1px;
+  box-shadow: 2px 2px rgba(119, 216, 240, 0.466), -0.5em 0 0.2em lavender;
+}
+.search-button,
+.locationButton {
+  border-radius: 20%;
+  position: absolute;
+  right: 20px;
+}
+.scroll-bar {
+  position: fixed;
+
+  width: 57%;
+}
+.week-end {
+  display: block;
+  margin: 0 auto;
+  color: #17a2b8;
+  font-style: italic;
+  font-weight: 500;
+}
