@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <div class="weather-app">
-            <div class="progress scroll-bar" id ="bar" style="height: 2px;">
+            <div class="progress scroll-bar" id ="bar" style="height: 1px;">
                 <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="5" aria-valuemin="0"
                     aria-valuemax="100"></div>
             </div>
@@ -49,9 +49,10 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class=" card temp-icon">
+                    <div class="temp-icon">
 
-                        <h3><span id="temp"></span>°<img id="icon" /> </h3>
+                        <h3><span id="temp"></span>°<img id="icon" />
+                         </h3>
 
                     </div>
                 </div>
@@ -64,57 +65,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-4">
-                    <div class="card temp-icon">
-                        <div class="card-body">
-                            <h3>22° <span class="badge badge-info">🌞</span></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    Tuesday 02/09/2020
-                </div>
-                <div class="col-4">
-                    Sunny with no chance of rain
-                </div>
-
+            <div class="row" id="nextHours">
             </div>
-            <div class="row">
-                <div class="col-4">
-                    <div class="card temp-icon">
-                        <div class="card-body">
-                            <h3>18° <span class="badge badge-info">⛅</span></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    Wednesday 03/09/2020
-                </div>
-                <div class="col-4">
-                    Slightly cloudy,throw on a hoodie
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-4">
-                    <div class="card temp-icon">
-                        <div class="card-body">
-                            <h3>15° <span class="badge badge-info">⛈</span></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    Thursday 04/09/2020
-                </div>
-                <div class="col-4">
-                    Thunderstorms and other tunes by AC/DC
-                </div>
-            </div>
-
-
-
 
             <h1 class="display-3 week-end">Weekend</h1>
 

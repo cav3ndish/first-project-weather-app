@@ -27,17 +27,22 @@ let months = [
   let date = today.getDate();
   let year =today.getFullYear();
 let currentDay = days[today.getDay()];
-let currentTime = today.getHours();
 let month = months[today.getMonth()];
+  
+return ` ${currentDay}</br>    ${month}  ${date}  ${year} </br> ${showNextHours(timestamp)}`;}
+
+
+function showNextHours(timestamp){
+  let today =  new Date(timestamp);
+  let currentTime = today.getHours();
 if (currentTime < 10) {
     currentTime = `0${currentTime}`;
   }
  let currentMinutes = today.getMinutes();
   if (currentMinutes < 10) {
-    currentMinutes = `0${currentMinutes}`;
-  }
-return ` ${currentDay}    ${month}  ${date}  ${year}  ${currentTime}:${currentMinutes}`;}
-
+    currentMinutes = `0${currentMinutes}`;}
+  return `${currentTime} : ${currentMinutes}`;
+}
 
 function showCity(event) {
   event.preventDefault();
@@ -70,10 +75,41 @@ descript.innerHTML = response.data.weather[0].description;
  icon.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 }
 
+function forecast(response){
+  console.log(response.data);
+let forecastColumn = document.querySelector("#nextHours");
+forecastColumn.innerHTML = null;
+let forecast = null;
+
+for (let index = 0; index < 3; index++) {
+ forecast = response.data.list[index];
+forecastColumn.innerHTML += `<div class="col-4">
+                    <div class="temp-icon">
+                            <h3>${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" /></h3>
+                </div>
+                </div>
+                <div class="col-4">
+                   ${showNextHours(forecast.dt*1000)}
+                </div>
+                <div class="col-4">
+                   ${forecast.weather[0].description}
+                </div>`
+}
+}
+
+function fillBar() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("bar").style.width = scrolled + "15%";
+}
 function search(city) {
   let apiKey = "0a0b749fb3632bec51c7fbeb7af687a1";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(infoWeather);
+
+  let apiUrlSecond = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+axios.get(apiUrlSecond).then(forecast);
 }
 
 function currentLocation(position) {
@@ -112,12 +148,9 @@ fahrenheit.addEventListener("click", showUnitTempFaren);
 let celsiusTemp = document.querySelector("#celsius");
 celsiusTemp.addEventListener("click", showUnitTempCelsius);
 
-window.onscroll = function() {myFunction()};
+window.onscroll = function() {fillBar()};
 
-function myFunction() {
-  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  var scrolled = (winScroll / height) * 100;
-  document.getElementById("bar").style.width = scrolled + "15%";
-}
+
+
+
 search("paris");
