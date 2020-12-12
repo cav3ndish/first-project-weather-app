@@ -76,7 +76,7 @@ descript.innerHTML = response.data.weather[0].description;
 }
 
 function forecast(response){
-  console.log(response.data);
+  
 let forecastColumn = document.querySelector("#nextHours");
 forecastColumn.innerHTML = null;
 let forecast = null;
@@ -96,6 +96,25 @@ forecastColumn.innerHTML += `<div class="col-4">
                 </div>`
 }
 }
+function nextDays(response)
+{
+  let nextDaysColumn = document.querySelector("#next-day");
+nextDaysColumn.innerHTML = null;
+let tomorrow = null;
+
+for (let i = 4; i <= 20; i = i + 8) {
+ tomorrow = response.data.list[i];
+nextDaysColumn.innerHTML += `  <div class="col-4">
+<div class="card temp-icon">
+                            <h3>${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" /> </h3>
+                        </div>
+                    </br>
+                    ${showDateTime(tomorrow.dt * 1000)}
+                   ${tomorrow.weather[0].description}
+                </div>`
+}
+}
+
 
 function fillBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -110,6 +129,10 @@ function search(city) {
 
   let apiUrlSecond = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrlSecond).then(forecast);
+
+ let apiUrlThird = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+axios.get(apiUrlThird).then(nextDays);
+
 }
 
 function currentLocation(position) {
