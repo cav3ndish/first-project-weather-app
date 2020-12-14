@@ -7,6 +7,7 @@ body {
 h3 {
   line-height: 1;
 }
+
 .weather-app {
   border: 1px solid #dadde1;
   padding: 15px;
@@ -22,6 +23,7 @@ h3 {
   text-align: center;
   word-spacing: 5px;
 }
+
 .temp-icon {
   margin-bottom: 10px;
   border-radius: 1px 60px;
@@ -49,4 +51,14 @@ h3 {
 }
 a:hover {
   cursor: copy;
+}
+
+.float {
+  margin: 35px 0;
+}
+.header {
+  color: #17a2b8;
+}
+.letter-space {
+  word-spacing: 3px;
 }

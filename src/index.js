@@ -29,7 +29,7 @@ let months = [
 let currentDay = days[today.getDay()];
 let month = months[today.getMonth()];
   
-return ` ${currentDay}</br>    ${month}  ${date}  ${year} </br> ${showNextHours(timestamp)}`;}
+return ` ${currentDay}</br>    ${month}   ${date}   ${year} </br> ${showNextHours(timestamp)}`;}
 
 
 function showNextHours(timestamp){
@@ -88,10 +88,11 @@ forecastColumn.innerHTML += `<div class="col-4">
                             <h3>${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" /></h3>
                 </div>
                 </div>
-                <div class="col-4">
+              
+                <div class="col-4 float">
                    ${showNextHours(forecast.dt*1000)}
                 </div>
-                <div class="col-4">
+                <div class="col-4 float">
                    ${forecast.weather[0].description}
                 </div>`
 }
@@ -108,9 +109,10 @@ nextDaysColumn.innerHTML += `  <div class="col-4">
 <div class="card temp-icon">
                             <h3>${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" /> </h3>
                         </div>
-                    </br>
+                    <div class="letter-space">
                     ${showDateTime(tomorrow.dt * 1000)}
                    ${tomorrow.weather[0].description}
+                   </div>
                 </div>`
 }
 }
@@ -119,8 +121,8 @@ nextDaysColumn.innerHTML += `  <div class="col-4">
 function fillBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  var scrolled = (winScroll / height) * 100;
-  document.getElementById("bar").style.width = scrolled + "15%";
+  var scrolled = (winScroll / height) * 50;
+  document.getElementById("bar").style.width = scrolled + "5%";
 }
 function search(city) {
   let apiKey = "0a0b749fb3632bec51c7fbeb7af687a1";
