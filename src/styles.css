@@ -13,7 +13,7 @@ h3 {
   padding: 15px;
   margin: 20px auto;
   border-radius: 10px;
-  max-width: 800px;
+  max-width: 600px;
 }
 .current-city {
   border-radius: 15px;
@@ -36,8 +36,14 @@ h3 {
 .search-button,
 .locationButton {
   border-radius: 20%;
-  position: absolute;
+
   right: 20px;
+}
+.locationButton {
+  max-width: 20px;
+}
+.search-button {
+  float: center;
 }
 .scroll-bar {
   position: fixed;

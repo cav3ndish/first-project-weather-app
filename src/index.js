@@ -85,7 +85,7 @@ for (let index = 0; index < 3; index++) {
  forecast = response.data.list[index];
 forecastColumn.innerHTML += `<div class="col-4">
                     <div class="temp-icon">
-                            <h3>${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" /></h3>
+                            <h3 class="temp">${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" /></h3>
                 </div>
                 </div>
               
@@ -107,7 +107,7 @@ for (let i = 4; i <= 20; i = i + 8) {
  tomorrow = response.data.list[i];
 nextDaysColumn.innerHTML += `  <div class="col-4">
 <div class="card temp-icon">
-                            <h3>${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" /> </h3>
+                            <h3 class="temp">${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" /> </h3>
                         </div>
                     <div class="letter-space">
                     ${showDateTime(tomorrow.dt * 1000)}
@@ -116,18 +116,19 @@ nextDaysColumn.innerHTML += `  <div class="col-4">
                 </div>`
 }
 }
-
+function tryAgain(){
+  alert("Narnia is not an option, try again 😀");}
 
 function fillBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 50;
-  document.getElementById("bar").style.width = scrolled + "5%";
+  document.getElementById("bar").style.width = scrolled + "10%";
 }
 function search(city) {
   let apiKey = "0a0b749fb3632bec51c7fbeb7af687a1";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(infoWeather);
+  axios.get(apiUrl).then(infoWeather).catch(tryAgain);
 
   let apiUrlSecond = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrlSecond).then(forecast);
@@ -150,14 +151,16 @@ function getCurrentCity(event) {
 
 function showUnitTempFaren(event) {
  event.preventDefault();
+ //document.querySelectorAll(".temp").forEach(function(item){ item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);});}
   let tempElement = document.querySelector("#temp");
 tempElement.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);}
 
 function showUnitTempCelsius(event) {
   event.preventDefault();
+  //document.querySelectorAll(".temp").forEach(function(item){ item.innerHTML = Math.round(celsiusTemperature);});}
  let  tempElement = document.querySelector("#temp");
  tempElement.innerHTML =Math.round( celsiusTemperature);
-  }
+}
 
 let celsiusTemperature = null;
 
