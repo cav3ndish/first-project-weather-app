@@ -85,7 +85,7 @@ for (let index = 0; index < 3; index++) {
  forecast = response.data.list[index];
 forecastColumn.innerHTML += `<div class="col-4">
                     <div class="temp-icon">
-                            <h3 class="temp">${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" /></h3>
+                            <h3 class="temperatureValue">${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" class="tempIcon" /></h3>
                 </div>
                 </div>
               
@@ -93,7 +93,9 @@ forecastColumn.innerHTML += `<div class="col-4">
                    ${showNextHours(forecast.dt*1000)}
                 </div>
                 <div class="col-4 float">
+                  <div>
                    ${forecast.weather[0].description}
+                   </div>
                 </div>`
 }
 }
@@ -107,11 +109,13 @@ for (let i = 4; i <= 20; i = i + 8) {
  tomorrow = response.data.list[i];
 nextDaysColumn.innerHTML += `  <div class="col-4">
 <div class="card temp-icon">
-                            <h3 class="temp">${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" /> </h3>
+                            <h3 class="temperatureValue">${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" class="tempIcon" /> </h3>
                         </div>
                     <div class="letter-space">
                     ${showDateTime(tomorrow.dt * 1000)}
+                    <div>
                    ${tomorrow.weather[0].description}
+                   </div>
                    </div>
                 </div>`
 }
@@ -151,15 +155,27 @@ function getCurrentCity(event) {
 
 function showUnitTempFaren(event) {
  event.preventDefault();
- //document.querySelectorAll(".temp").forEach(function(item){ item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);});}
-  let tempElement = document.querySelector("#temp");
-tempElement.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);}
+  let tempElement = document.querySelectorAll(".temperatureValue");
+  tempElement.forEach(function (item) {
+
+    item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+  });
+}
+ //document.querySelectorAll(".temperatureValue").forEach(function(item){ item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);});}
+ // let tempElement = document.querySelector("#temp");
+//tempElement.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);}
 
 function showUnitTempCelsius(event) {
   event.preventDefault();
   //document.querySelectorAll(".temp").forEach(function(item){ item.innerHTML = Math.round(celsiusTemperature);});}
- let  tempElement = document.querySelector("#temp");
- tempElement.innerHTML =Math.round( celsiusTemperature);
+ //let  tempElement = document.querySelector("#temp");
+// tempElement.innerHTML =Math.round( celsiusTemperature);
+
+   let tempElement = document.querySelectorAll(".temperatureValue");
+  tempElement.forEach(function (item) {
+
+    item.innerHTML = Math.round(celsiusTemperature);
+  });
 }
 
 let celsiusTemperature = null;

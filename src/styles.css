@@ -23,7 +23,9 @@ h3 {
   text-align: center;
   word-spacing: 5px;
 }
-
+.tempIcon {
+  width: 50%;
+}
 .temp-icon {
   margin-bottom: 10px;
   border-radius: 1px 60px;
@@ -47,7 +49,7 @@ h3 {
 }
 .scroll-bar {
   position: fixed;
-  max-width: 57%;
+  max-width: 47%;
 }
 .week-end {
   display: block;
