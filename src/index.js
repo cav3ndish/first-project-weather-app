@@ -1,6 +1,9 @@
 
 function showDateTime(timestamp) {
-  let today =  new Date(timestamp);
+return ` ${showDate(timestamp)} </br> ${showNextHours(timestamp)}`;}
+
+function showDate(timestamp){
+   let today =  new Date(timestamp);
 let days = [
 "Sunday",
 "Monday",
@@ -28,9 +31,8 @@ let months = [
   let year =today.getFullYear();
 let currentDay = days[today.getDay()];
 let month = months[today.getMonth()];
-  
-return ` ${currentDay}</br>    ${month}   ${date}   ${year} </br> ${showNextHours(timestamp)}`;}
-
+return ` ${currentDay}</br>    ${month}   ${date}   ${year}`; 
+}
 
 function showNextHours(timestamp){
   let today =  new Date(timestamp);
@@ -50,7 +52,6 @@ function showCity(event) {
  search(cityInput.value);
  }
 function infoWeather(response) {
-
 let cityElement =  document.querySelector(".city");
 cityElement.innerHTML = response.data.name;          
 cityElement.innerHTML = cityElement.innerHTML.trim();
@@ -75,51 +76,56 @@ descript.innerHTML = response.data.weather[0].description;
  icon.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 }
 
-function forecast(response){
-  
-let forecastColumn = document.querySelector("#nextHours");
-forecastColumn.innerHTML = null;
-let forecast = null;
-
-for (let index = 0; index < 3; index++) {
- forecast = response.data.list[index];
-forecastColumn.innerHTML += `<div class="col-4">
+function forecast(response) {
+  let forecastColumn = document.querySelector("#nextHours");
+  forecastColumn.innerHTML = null;
+  let forecast = null;
+  for (let index = 0; index < 3; index++) {
+    forecast = response.data.list[index];
+    forecastColumn.innerHTML += `<div class="col-4">
                     <div class="temp-icon">
-                            <h3 class="temperatureValue">${Math.round(forecast.main.temp)}° <img src= "https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt ="weather icon" class="tempIcon" /></h3>
+                            <h3><span class="temperatureValue">${Math.round(
+                              forecast.main.temp
+                            )}</span>° <img src= "https://openweathermap.org/img/wn/${
+      forecast.weather[0].icon
+    }@2x.png" alt ="weather icon" class="tempIcon" /></h3>
                 </div>
                 </div>
-              
                 <div class="col-4 float">
-                   ${showNextHours(forecast.dt*1000)}
+                   ${showNextHours(forecast.dt * 1000)}
                 </div>
                 <div class="col-4 float">
                   <div>
                    ${forecast.weather[0].description}
                    </div>
-                </div>`
+                </div>`;
+  }
 }
-}
-function nextDays(response)
-{
-  let nextDaysColumn = document.querySelector("#next-day");
-nextDaysColumn.innerHTML = null;
-let tomorrow = null;
 
-for (let i = 4; i <= 20; i = i + 8) {
- tomorrow = response.data.list[i];
-nextDaysColumn.innerHTML += `  <div class="col-4">
+function nextDays(response) {
+  let nextDaysColumn = document.querySelector("#next-day");
+  nextDaysColumn.innerHTML = null;
+  let tomorrow = null;
+  for (let i = 4; i <= 20; i = i + 8) {
+    tomorrow = response.data.list[i];
+    nextDaysColumn.innerHTML += `  <div class="col-4">
 <div class="card temp-icon">
-                            <h3 class="temperatureValue">${Math.round(tomorrow.main.temp)}°<img src= "https://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png" alt="weather icon" class="tempIcon" /> </h3>
+                            <h3><span class="temperatureValue">${Math.round(
+                              tomorrow.main.temp
+                            )}</span>°<img src= "https://openweathermap.org/img/wn/${
+      tomorrow.weather[0].icon
+    }@2x.png" alt="weather icon" class="tempIcon" /> </h3>
                         </div>
                     <div class="letter-space">
-                    ${showDateTime(tomorrow.dt * 1000)}
+                    ${showDate(tomorrow.dt * 1000)}
                     <div>
                    ${tomorrow.weather[0].description}
                    </div>
                    </div>
-                </div>`
+                </div>`;
+  }
 }
-}
+
 function tryAgain(){
   alert("Narnia is not an option, try again 😀");}
 
@@ -154,28 +160,25 @@ function getCurrentCity(event) {
 }
 
 function showUnitTempFaren(event) {
- event.preventDefault();
+  event.preventDefault();
   let tempElement = document.querySelectorAll(".temperatureValue");
   tempElement.forEach(function (item) {
-
-    item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
   });
+  fahrenheit.removeEventListener("click", showUnitTempFaren);
+  celsiusTemp.addEventListener("click", showUnitTempCelsius);
 }
- //document.querySelectorAll(".temperatureValue").forEach(function(item){ item.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);});}
- // let tempElement = document.querySelector("#temp");
-//tempElement.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);}
 
 function showUnitTempCelsius(event) {
   event.preventDefault();
-  //document.querySelectorAll(".temp").forEach(function(item){ item.innerHTML = Math.round(celsiusTemperature);});}
- //let  tempElement = document.querySelector("#temp");
-// tempElement.innerHTML =Math.round( celsiusTemperature);
-
-   let tempElement = document.querySelectorAll(".temperatureValue");
+  let tempElement = document.querySelectorAll(".temperatureValue");
   tempElement.forEach(function (item) {
-
-    item.innerHTML = Math.round(celsiusTemperature);
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
   });
+  fahrenheit.addEventListener("click", showUnitTempFaren);
+  celsiusTemp.removeEventListener("click", showUnitTempCelsius);
 }
 
 let celsiusTemperature = null;
@@ -193,8 +196,5 @@ let celsiusTemp = document.querySelector("#celsius");
 celsiusTemp.addEventListener("click", showUnitTempCelsius);
 
 window.onscroll = function() {fillBar()};
-
-
-
 
 search("paris");
