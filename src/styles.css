@@ -61,6 +61,10 @@ a:hover {
   cursor: copy;
 }
 
+button:click {
+  color: #badafb59;
+}
+
 .float {
   margin: 35px 0;
 }

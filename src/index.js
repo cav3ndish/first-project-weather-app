@@ -96,7 +96,8 @@ function forecast(response) {
                 </div>
                 <div class="col-4 float">
                   <div>
-                   ${forecast.weather[0].description}
+                  ${forecast.weather[0].description.charAt(0).toUpperCase()}${forecast.weather[0].description.substring(1).toLowerCase()}
+                  
                    </div>
                 </div>`;
   }
@@ -119,7 +120,8 @@ function nextDays(response) {
                     <div class="letter-space">
                     ${showDate(tomorrow.dt * 1000)}
                     <div>
-                   ${tomorrow.weather[0].description}
+                    ${tomorrow.weather[0].description.charAt(0).toUpperCase()}${tomorrow.weather[0].description.substring(1).toLowerCase()}
+                  
                    </div>
                    </div>
                 </div>`;
@@ -181,6 +183,7 @@ function showUnitTempCelsius(event) {
   celsiusTemp.removeEventListener("click", showUnitTempCelsius);
 }
 
+
 let celsiusTemperature = null;
 
 let currentCity = document.querySelector("#locationButton");
@@ -193,7 +196,6 @@ let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", showUnitTempFaren);
 
 let celsiusTemp = document.querySelector("#celsius");
-celsiusTemp.addEventListener("click", showUnitTempCelsius);
 
 window.onscroll = function() {fillBar()};
 
